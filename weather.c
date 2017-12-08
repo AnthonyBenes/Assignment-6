@@ -19,6 +19,7 @@ WeatherData ** createDate(FILE *f, int *size) {
 		outPut[i] = (WeatherData *)malloc(sizeof(WeatherData));
 		outPut[i]->date = (char *)malloc(sizeof(char) * 18);
 		errorCheck = fscanf(f, "%s %lf", outPut[i]->date, &(outPut[i]->temp));
+		//esures that fscanf read in the right amount of information
 		if (errorCheck != 2) {
 			return NULL;
 		}
