@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Stadium {
 
+    //necessary Stadium variables
     String name;
     String teamName;
     String city;
@@ -14,6 +15,7 @@ public class Stadium {
     double latitude;
     double longitude;
 
+    //stadium constructor
     public Stadium(String name,
                    String teamName,
                    String city,
@@ -26,46 +28,54 @@ public class Stadium {
         this.city = city;
         this.state = state;
         this.yearBuilt = yearBuilt;
-        if(latitude > -180 && latitude < 180){
+        if(latitude > -180 && latitude < 180){  //input validation
             this.latitude = latitude;
         }else{
             this.latitude = 0;
         }
-        if(longitude > -180 && longitude < 180){
+        if(longitude > -180 && longitude < 180){  //input validation
             this.longitude = longitude;
         }else{
             this.longitude = 0;
         }
     }
 
+    //function to get stadium name
     public String getName(){
         return this.name;
     }
 
+    //function to get team name
     public String getTeamName(){
         return this.teamName;
     }
 
+    //function to get city
     public String getCity(){
         return this.city;
     }
 
+    //function to get state
     public String getState(){
         return this.state;
     }
 
+    //function to get year built
     public int getYearBuilt(){
         return this.yearBuilt;
     }
 
+    //function to get latitude
     public double getLatitude(){
         return this.latitude;
     }
 
+    //function to get longitude
     public double getLongitude(){
         return this.longitude;
     }
 
+    //returns a string with all of the stadium information, ready to be printed and read 
     @Override
     public String toString() {
         String outPut = name + ", home of the " + teamName + ", (" + yearBuilt
@@ -73,12 +83,14 @@ public class Stadium {
         return outPut;
     }
 
+    //returns the air distance between the stadium the function is called on and the stadium passed in
     public double getAirDistance(Stadium destination) {
         return Math.acos(Math.sin(Math.toRadians(this.latitude)) * Math.sin(Math.toRadians(destination.latitude))
                 + Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(destination.latitude))
                 * Math.cos(Math.toRadians(destination.longitude) - Math.toRadians(this.longitude))) * 6371;
     }
 
+    //returns the air distance between all of the stadiums in the list
     public static double getAirDistances(List<Stadium> stadiums) {
         double distance = 0;
         for(int i = 1; i < stadiums.size(); i++){
@@ -87,6 +99,7 @@ public class Stadium {
         return distance;
     }
 
+    //compares stadiums by stadium name
     public static final Comparator<Stadium> byName = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -94,6 +107,7 @@ public class Stadium {
         }
     };
 
+    //compares stadiums by team name
     public static final Comparator<Stadium> byTeamName = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -101,6 +115,7 @@ public class Stadium {
         }
     };
 
+    //compares stadiums by age
     public static final Comparator<Stadium> byAge = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -108,6 +123,7 @@ public class Stadium {
         }
     };
 
+    //compares stadiums by reverse age
     public static final Comparator<Stadium> byAgeNewestFirst = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -115,6 +131,7 @@ public class Stadium {
         }
     };
 
+    //compares stadiums by state, then city
     public static final Comparator<Stadium> byStateCity = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -127,6 +144,7 @@ public class Stadium {
         }
     };
 
+    //compares stadiums by latitude
     public static final Comparator<Stadium> byLatitude = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -134,6 +152,7 @@ public class Stadium {
         }
     };
 
+    //compares stadiums by longitude
     public static final Comparator<Stadium> byLongitude = new Comparator<Stadium>() {
         @Override
         public int compare(Stadium arg0, Stadium arg1) {
@@ -141,6 +160,7 @@ public class Stadium {
         }
     };
 
+    //sorts stadiums by the specified value (order)
     public static void sortStadiums(List<Stadium> stadiums, Order order) {
         switch (order)
         {
